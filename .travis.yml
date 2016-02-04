@@ -3,6 +3,7 @@ services:
   - docker
 language: bash
 script:
+  - ps wwaux
   - wget https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh
   - chmod +x check-config.sh
   - ./check-config.sh
