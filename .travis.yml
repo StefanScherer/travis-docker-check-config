@@ -1,0 +1,8 @@
+sudo: required
+services:
+  - docker
+language: bash
+script:
+  - wget https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh
+  - chmod +x check-config.sh
+  - ./check-config.sh
