@@ -3,7 +3,18 @@ services:
   - docker
 language: bash
 script:
-  - ps wwaux
+  - echo "Installing check-config.sh"
   - wget https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh
   - chmod +x check-config.sh
   - ./check-config.sh
+  - echo "Installing VirtualBox 5"
+  - sudo echo "deb http://download.virtualbox.org/virtualbox/debian vivid contrib" | sudo tee -a /etc/apt/sources.list
+  - wget https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+  - sudo apt-get update
+  - sudo apt-get -y install linux-headers-$(uname -r)
+  - sudo apt-get -y install virtualbox-5.0
+  - echo "Installing docker-machine"
+  - curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+  - chmod +x /usr/local/bin/docker-machine
+  - docker-machine -D create -d virtualbox --virtualbox-boot2docker-url https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/boot2docker.iso dev
+  - docker-machine ls
