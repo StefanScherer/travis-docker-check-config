@@ -16,6 +16,6 @@ script:
   - echo "Installing docker-machine"
   - curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-Linux-x86_64 >/usr/local/bin/docker-machine
   - chmod +x /usr/local/bin/docker-machine
-  - echo "Creating a 32bit docker machine"
+  - echo "Creating a 32bit VirtualBox Docker machine"
   - docker-machine -D create -d virtualbox --virtualbox-boot2docker-url https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/boot2docker.iso dev
   - docker-machine ls
