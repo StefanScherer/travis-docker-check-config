@@ -18,5 +18,19 @@ script:
   - sudo curl -L -o /usr/local/bin/docker-machine https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/docker-machine-Linux-x86_64
   - sudo chmod +x /usr/local/bin/docker-machine
   - echo "Creating a 32bit VirtualBox Docker machine"
-  - docker-machine -D create -d virtualbox --virtualbox-no-vtx-check --virtualbox-boot2docker-url https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/boot2docker.iso dev
+  - docker-machine -D create -d virtualbox --virtualbox-no-vtx-check --virtualbox-boot2docker-url https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/boot2docker.iso dev || true
+  - VBoxManage controlvm dev screenshotpng screenshot.png
   - docker-machine ls
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "cWY/Ta8mbpi9ZJzW8haPqilJSrQpIi1GrBreTRnDpjvc1cF/1v87gpLYlgmVroJmsncMkUX+85Bv3E5OXNML5vBpq5yP7h0lL9LNeJfofw+HZUnk30xQp7355syKF9YDE+yYUxhkmgGPfY/Qe1AtyIDzotrk4DNHIKriTq9lnlSVxahTu2SY91fOppoeWkuRBIrqLOMUVTymPFwV1BNKwxyygHQgRhgZ+GLMSVhO9f0Uj/mwFRpv7JgSlm/LShVWBBUXAPrUfwJdNwCPmcRnI0WnQxOHIA/CoYzYR1PgVhXFBCpyD7RcspU+8O0qZb1A4aqYy+YdMiS/7W68k9cm2MDjENaiY/hg4uPQElVIBqCXRMD9DAkLPuKY9r1zljEpFW7pBG4UEKglK7MpFh0MymVOUMnn2Li5xPb5gm8E0lRyNCB5rxvc/FwJo7w5emTwI5pkXfjVNh8FXlUZdt1czhwZlHbPembmqc/F3JkjhGIG6G/uKtQZu5eXxxOMdB/iy6nqQKT7ds/MG08nmFvwM2A+Bzcv4zGFgaGdfsIl9sDsn6Q+RdTOEdTUa6EVjwJbt73bJdIYEhfzsQP8cTJBFwoIp1WqADHh5oyLtwyQhyUiIiqrZHmfkZjIpFDEDB4BcJayOEO45W7g/iqf2xDB7BtyO4ZpaJupuuDgfVbDJYY="
+  file:
+    - screenshot.png
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: StefanScherer/travis-docker-check-config
+    all_branches: true
+
