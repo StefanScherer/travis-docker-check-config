@@ -14,7 +14,8 @@ script:
   - sudo apt-get -y install linux-headers-$(uname -r)
   - sudo apt-get -y install virtualbox-5.0
   - echo "Installing docker-machine"
-  - sudo curl -L -o /usr/local/bin/docker-machine https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-Linux-x86_64
+# - sudo curl -L -o /usr/local/bin/docker-machine https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-Linux-x86_64
+  - sudo curl -L -o /usr/local/bin/docker-machine https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/docker-machine-Linux-x86_64
   - sudo chmod +x /usr/local/bin/docker-machine
   - echo "Creating a 32bit VirtualBox Docker machine"
   - docker-machine -D create -d virtualbox --virtualbox-no-vtx-check --virtualbox-boot2docker-url https://github.com/StefanScherer/boot2docker/releases/download/v1.9.1-386/boot2docker.iso dev
